@@ -1,0 +1,26 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+<h1 id="blogtitle" class="font-weight-bold text-center">Blog</h1>
+<h3 class="text-center mb-5">Mark writ {{ blogs.count }} blog{{ blogs.count|pluralize }}</h3>
+
+
+
+{% for blogs in blogs %}
+
+<div class="row justify-content-center my-3">
+    <div class="col-md-10">
+        <a href="{% url 'blog:detail' blogs.id %}">
+            <h2>{{ blogs.title }}</h2>
+        </a>
+        <h5 class="text-muted">{{ blogs.data|date:'M d Y'|upper }}</h5>
+        <h4>{{ blogs.description|striptags|truncatechars:100 }}</h4>
+        {% if blogs.url %}
+        <a href="{{ blogs.url }}">Link</a>
+        {% endif %}
+    </div>
+</div>
+{% endfor %}
+{% endblock %}
+
+
